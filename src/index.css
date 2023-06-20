@@ -1,0 +1,53 @@
+:root {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 62.5%;
+  font-synthesis: none;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  display: flex;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 320px;
+  place-items: center;
+}
+
+button {
+  align-items: center;
+  border: 3px solid #000000;
+  border-radius: 20px;
+  box-shadow: 0px 10px 0px #000000;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  justify-content: space-between;
+  margin-bottom: 2.7rem;
+  min-height: 72px;
+  min-width: 335px;
+  padding: 1.3rem 1.7rem;
+  transition-duration: 100ms;
+  transition-property: border, box-shadow;
+  transition-timing-function: ease-in;
+
+  /*There's has to be a better place to declare the font family globally*/
+  /* the margin-bottom doesn't apply to every single button, would be overriden multiples times in many places. BE AWARE*/
+}
+
+/* delete margin of last button in a collection of button */
+/* button:last-child {
+  margin-bottom: 0;
+} */
+
+button:hover , button:focus-visible {
+  border: 3px solid var(--color-menu-p);
+  box-shadow: 0px 10px 0px var(--color-menu-p);
+}
