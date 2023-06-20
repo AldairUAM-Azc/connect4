@@ -1,0 +1,5 @@
+@import "../../CustomProps.css";
+
+body {
+  background-color: var(--color-game-p);
+}

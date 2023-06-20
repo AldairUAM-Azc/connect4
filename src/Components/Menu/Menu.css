@@ -1,13 +1,21 @@
-@import "CustomProps.css";
+@import "../../CustomProps.css";
 
+
+.main-menu-container {
+    width: 100vw;
+    height: 100vh;
+    display : grid;
+    place-content: center;
+
+}
 
 .main-menu {
     min-height: 305px;
-    max-width: 335px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    flex-direction: column;
+    align-content: center;
 }
 
 .main-menu  button:last-child {
