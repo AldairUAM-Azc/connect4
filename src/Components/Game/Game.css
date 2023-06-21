@@ -1,10 +1,19 @@
 @import "../../CustomProps.css";
 
+/*
+    Contents
+  1. General Container
+  2. Options Section
+  3. Scores Section
+  4. Board Section
+*/
+
+/* 1. General Container*/
 .game {
     padding: 0rem 2.0rem;
     width: 100vw;
 }
-
+/* 2. Options Section */
 .game .options {
     display: flex;
     justify-content: space-between;
@@ -35,7 +44,7 @@
     border-radius:4.0rem;
 }
 
-
+/* 3. Scores Section */
 .game .scores {
     display: flex;
     justify-content: space-between;
@@ -68,3 +77,5 @@
 .game .scores .button div {
     font-size: 3.2rem;
 }
+
+/* 4. Board Section */
