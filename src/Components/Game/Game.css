@@ -1,34 +1,58 @@
 @import "../../CustomProps.css";
 
-body {
-    display: initial;
+.game {
+    padding: 0rem 2.0rem;
+    width: 100vw;
 }
+
 .game .options {
     display: flex;
     justify-content: space-between;
-    max-height: 4.0rem;
     height: 4.0rem;
+    margin-bottom:5rem;
 }
 
-.game  .logo {
+.game .options .logo {
     height: 100%;
-    width: 4.0rem;
 }
 
 .game .options .button {
     background-color: var(--color-menu-p);
-    min-height: unset;
     border: unset;
     box-shadow: unset;
     color: white;
     font-size: 1.6rem;
-    font-style: normal;
+    font-weight: 400;
+    display: flex;
     justify-content: center;
     margin-bottom: unset;
     height: 100%;
     min-width: 10.8rem;
+    width: 11rem;
     padding: 3.2rem 1.0rem;
     text-align: center;
     padding: unset;
     border-radius:4.0rem;
+}
+
+
+.game .scores {
+    display: flex;
+    width: 17rem;
+    height: 8rem;
+}
+
+.game .scores .button {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.6rem;
+    padding: 1rem 3.5rem ;
+    width: 14.2rem;
+    height: 8.0rem;
+    margin-bottom: unset;
+    line-height: 2.0rem;
+    box-sizing: border-box;
+}
+.game .scores .button div {
+    font-size: 3.2rem;
 }

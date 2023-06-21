@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import './App.css'
 import Game from "../Game/Game"
 import Menu from "../Menu/Menu"
+import './App.css'
 
 
 const views = {
@@ -12,10 +12,10 @@ const views = {
 
 function App() {
   const [view, setView] = useState(views.Menu);
-  {console.log(view)}
+  { console.log(view) }
   return (
 
-    <div>
+    <div className='main-container'>
       {/* I prefer this state machine approach  instead of Router cause simplicity*/}
       {view == views.Menu && <Menu setView={setView} views={views} />}
       {view == views.Game && <Game />}
