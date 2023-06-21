@@ -83,27 +83,30 @@
 
 /* 4. Board Section */
 .game .board {
-    counter-reset: counter 0;
+    height: 31rem;
     position: relative;
+    width: 33.5rem;
 }
-.game .board > .layer {
+
+.game .board>.layer {
     background-repeat: no-repeat;
     background-size: cover;
-    height: 31rem;
+    height: 100%;
     position: absolute;
-    width: 33.5rem;
+    width: 100%;
 }
 
 .game .board .back {
     background-image: url(../../assets/images/board-layer-black-small.svg);
-    color: white;
-    z-index: var(--board-back);
     border-radius: 20px;
     box-shadow: 0px 10px 0px #000000;
+    z-index: var(--board-back);
 }
 
 .game .board .mid {
     display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     z-index: var(--board-mid);
 }
 
