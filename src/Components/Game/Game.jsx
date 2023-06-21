@@ -19,7 +19,8 @@ function Game() {
       </div>
       <div className="board">
         <div className="back layer"></div>
-        <div className="mid layer play-area"></div>
+        <div className="mid layer play-area">
+        </div>
         <div className="front layer"></div>
       </div>
     </section>

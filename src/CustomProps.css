@@ -1,5 +1,6 @@
 :root {
-    --color-y: #FFCE67;
+    --p2: #FFCE67;
+    --p1: #FD6687;
     --color-menu-p: #5C2DD5;
     --color-game-p: #7945FF;
 
@@ -7,5 +8,4 @@
     --board-back: 1;
     --board-mid: 2;
     --board-front: 3;
-    
 }

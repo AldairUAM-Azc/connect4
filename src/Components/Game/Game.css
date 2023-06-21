@@ -88,7 +88,8 @@
     width: 33.5rem;
 }
 
-.game .board>.layer {
+
+.game .board > .layer {
     background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
@@ -107,10 +108,28 @@
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    place-items: center;
     z-index: var(--board-mid);
+    height: 92%;
 }
 
 .game .board .front {
     background-image: url(../../assets/images/board-layer-white-small.svg);
     z-index: var(--board-front);
+}
+
+.game .board .mid .pellet {
+    z-index: var(--board-mid);
+    height: 3.4rem;
+    width: 3.4rem;
+    border-radius: 50%;
+    box-shadow: 0px 5px 0px #000000, inset 0px 5px 0px 2px rgba(0, 0, 0, 0.5);
+    transform: translate(0.1rem, 0rem);
+}
+
+.game .board .mid .pellet.p1 {
+    background-color: var(--p1);
+}
+.game .board .mid .pellet.p2 {
+    background-color: var(--p2);
 }
