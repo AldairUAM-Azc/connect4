@@ -38,7 +38,7 @@
 
 .game .scores {
     display: flex;
-    width: 17rem;
+    justify-content: space-between;
     height: 8rem;
 }
 
@@ -53,6 +53,18 @@
     line-height: 2.0rem;
     box-sizing: border-box;
 }
+.game .scores .button:first-of-type::before {
+    content: url(../../assets/images/player-one.svg);
+    position:absolute;
+    transform: translateX(-6.5rem);
+}
+
+.game .scores .button:last-of-type::before {
+    content: url(../../assets/images/player-two.svg);
+    position:absolute;
+    transform: translateX(6.5rem);
+}
+
 .game .scores .button div {
     font-size: 3.2rem;
 }
