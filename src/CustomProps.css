@@ -2,4 +2,10 @@
     --color-y: #FFCE67;
     --color-menu-p: #5C2DD5;
     --color-game-p: #7945FF;
+
+    --board-base: 0;
+    --board-back: 1;
+    --board-mid: 2;
+    --board-front: 3;
+    
 }

@@ -18,9 +18,9 @@ function Game() {
         </button>
       </div>
       <div className="board">
-        <div className="back"></div>
-        <div className="mid play-area"></div>
-        <div className="front"></div>
+        <div className="back layer"></div>
+        <div className="mid layer play-area"></div>
+        <div className="front layer"></div>
       </div>
     </section>
   );

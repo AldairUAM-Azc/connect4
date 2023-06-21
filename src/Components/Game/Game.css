@@ -13,12 +13,13 @@
     padding: 0rem 2.0rem;
     width: 100vw;
 }
+
 /* 2. Options Section */
 .game .options {
     display: flex;
-    justify-content: space-between;
     height: 4.0rem;
-    margin-bottom:5rem;
+    justify-content: space-between;
+    margin-bottom: 5rem;
 }
 
 .game .options .logo {
@@ -28,49 +29,51 @@
 .game .options .button {
     background-color: var(--color-menu-p);
     border: unset;
+    border-radius: 4.0rem;
     box-shadow: unset;
     color: white;
+    display: flex;
     font-size: 1.6rem;
     font-weight: 400;
-    display: flex;
+    height: 100%;
     justify-content: center;
     margin-bottom: unset;
-    height: 100%;
     min-width: 10.8rem;
-    width: 11rem;
     padding: 3.2rem 1.0rem;
-    text-align: center;
     padding: unset;
-    border-radius:4.0rem;
+    text-align: center;
+    width: 11rem;
 }
 
 /* 3. Scores Section */
 .game .scores {
     display: flex;
-    justify-content: space-between;
     height: 8rem;
+    justify-content: space-between;
+    margin-bottom: 5rem;
 }
 
 .game .scores .button {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     font-size: 1.6rem;
-    padding: 1rem 3.5rem ;
-    width: 14.2rem;
     height: 8.0rem;
-    margin-bottom: unset;
     line-height: 2.0rem;
-    box-sizing: border-box;
+    margin-bottom: unset;
+    padding: 1rem 3.5rem;
+    width: 14.2rem;
 }
+
 .game .scores .button:first-of-type::before {
     content: url(../../assets/images/player-one.svg);
-    position:absolute;
+    position: absolute;
     transform: translateX(-6.5rem);
 }
 
 .game .scores .button:last-of-type::before {
     content: url(../../assets/images/player-two.svg);
-    position:absolute;
+    position: absolute;
     transform: translateX(6.5rem);
 }
 
@@ -79,3 +82,32 @@
 }
 
 /* 4. Board Section */
+.game .board {
+    counter-reset: counter 0;
+    position: relative;
+}
+.game .board > .layer {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 31rem;
+    position: absolute;
+    width: 33.5rem;
+}
+
+.game .board .back {
+    background-image: url(../../assets/images/board-layer-black-small.svg);
+    color: white;
+    z-index: var(--board-back);
+    border-radius: 20px;
+    box-shadow: 0px 10px 0px #000000;
+}
+
+.game .board .mid {
+    display: grid;
+    z-index: var(--board-mid);
+}
+
+.game .board .front {
+    background-image: url(../../assets/images/board-layer-white-small.svg);
+    z-index: var(--board-front);
+}
