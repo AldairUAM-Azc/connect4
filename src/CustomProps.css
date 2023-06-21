@@ -8,4 +8,7 @@
     --board-back: 1;
     --board-mid: 2;
     --board-front: 3;
+
+    --p1-pellet: url(./assets/images/counter-yellow-small.svg);
+    --p2-pellet: url(./assets/images/counter-red-small.svg);
 }
