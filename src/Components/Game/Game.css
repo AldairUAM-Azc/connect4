@@ -6,6 +6,7 @@
   2. Options Section
   3. Scores Section
   4. Board Section
+  5. Turn Section
 */
 
 /* 1. General Container*/
@@ -86,6 +87,7 @@
     height: 31rem;
     position: relative;
     width: 33.5rem;
+    margin: 0 auto;
 }
 
 
@@ -124,8 +126,9 @@
     height: 4.3rem;
     width: 4.3rem;
     background-size: contain;
-    transform: translate(6px, 5px);
+    transform: translate(4px, 6px);
     background-repeat: no-repeat;
+    background-position: center;
 
 
 }
@@ -135,4 +138,44 @@
 }
 .game .board .mid .pellet.p2 {
     background-image: var(--p2-pellet);
+}
+
+/* 5. Turn Section */
+.game .turn {
+    position: relative;
+    z-index: calc(var(--board-front));
+    background-image: url(../../assets/images/turn-background-red.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translateY(-2rem);
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.game .turn .turn-bg {
+    margin: 0 auto;
+    width: 19rem;
+    height: 15rem;
+    display: grid;
+    place-items: center;
+}
+.game .turn .turn-sign {
+    color: white;
+    text-align: center;
+}
+.game .turn .timer {
+    font-size: 5.6rem;
+    line-height: 7rem;
+    font-weight: 700;
+}
+
+/* BG decoration */ 
+ .bg-decoration {
+    width: 100vw;
+    height: 23.6rem;
+    border-radius: 6rem 6rem 0 0;
+    background-color: var(--color-menu-p);
+    position: absolute;
+    bottom: 0;
 }
