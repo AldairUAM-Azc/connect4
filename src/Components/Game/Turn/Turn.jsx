@@ -3,19 +3,23 @@ import { useEffect, useState } from "react";
 const Turn = ({ game, setGame, players, countdown, setCountDown}) => {
 
   
-
+  
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCountDown(countdown - 1);
-    }, 1000)
     // if time runs out the other wins
     if (!countdown) {
+      const otherPlayer  = game.player === players.P1 ? players.P2 : players.P1
       setGame({
         ...game,
-        winner: game.winner == players.P1 ? players.P1 : players.P2
+        winner: otherPlayer,
+        scores: {...game.scores, [otherPlayer]: game.scores[otherPlayer] + 1}
       });
       return;
     }
+
+    const timer = setInterval(() => {
+      setCountDown(countdown - 1);
+    }, 1000)
+    
     return () => clearInterval(timer)
   }, [countdown])
 

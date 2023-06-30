@@ -12,9 +12,8 @@ const views = {
 
 function App() {
   const [view, setView] = useState(views.Menu);
-  { console.log(view) }
+  
   return (
-
     <div className='main-container'>
       {/* I prefer this state machine approach  instead of Router cause simplicity*/}
       {view == views.Menu && <Menu setView={setView} views={views} />}

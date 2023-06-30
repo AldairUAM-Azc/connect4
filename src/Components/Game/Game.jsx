@@ -1,7 +1,8 @@
 import { useState } from "react"
-import logo from "../../assets/images/logo.svg"
 import Board from "../Game/Board/Board"
 import Turn from "../Game/Turn/Turn"
+import Scores from "../Game/Scores/Scores"
+import Options from "../Game/Options/Options"
 import "./Game.css"
 
 function Game() {
@@ -11,7 +12,7 @@ function Game() {
     noPlayer: null
   }
 
-  const [game, setGame] = useState({
+  const initialGame = {
     player: players.P1,
     winner: players.noPlayer,
     board: [
@@ -22,19 +23,23 @@ function Game() {
       [null, null, null, null, null, null, null],
       [null, null, null, null, null, null, null],
     ],
-  })
+    scores: {
+      [players.P1]: 0,
+      [players.P2]: 0
+    }
+  }
 
-  const turnTime = 10 //seconds
+  const [game, setGame] = useState(initialGame)
+
+  const turnTime = 100 //seconds
   const [countdown, setCountDown] = useState(turnTime) //cant put countdown in game State since will trigger  a rerender every damn second
   const resetCountdown = () => setCountDown(turnTime)
-
-
 
   return (
     <>
       <section className="game">
         <Options></Options>
-        <Scores></Scores>
+        <Scores game={game} setGame={setGame} players={players}></Scores>
         <Board game={game} setGame={setGame} players={players} resetCountdown={resetCountdown} ></Board>
         <Turn game={game} setGame={setGame} players={players} countdown={countdown} setCountDown={setCountDown}></Turn>
       </section>
@@ -42,33 +47,5 @@ function Game() {
     </>
   );
 }
-
-const Options = () => {
-  return (
-    <div className="options">
-      <button className="button">MENU</button>
-      <img className="logo" src={logo} alt="Logo" />
-      <button className="button">RESTART</button>
-    </div>
-  )
-}
-
-const Scores = () => {
-  return (
-    <div className="scores">
-      <button className="button">PLAYER1
-        <div>12</div>
-      </button>
-      <button className="button">PLAYER2
-        <div>23</div>
-      </button>
-    </div>
-  )
-}
-
-
-
-
-
 
 export default Game;

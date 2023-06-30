@@ -4,6 +4,10 @@ import p2Token from "../../../assets/images/counter-red-small.svg"
 const Board = ({ game, setGame, players, resetCountdown }) => {
 
   const playToken = (ev) => {
+    console.log("START")
+    if (game.winner) {
+      return
+    }
     const row = ev.target.getAttribute("row");
     const col = ev.target.getAttribute("col");
 
@@ -21,15 +25,15 @@ const Board = ({ game, setGame, players, resetCountdown }) => {
       player: game.player === players.P1 ? players.P2 : players.P1, // toggle between players
       board: newBoard,
     })
-    //
     checkWinner()
     resetCountdown()
-
     if (ev.target.getAttribute("row") > - 1)
       ev.target.setAttribute("row", + ev.target.getAttribute("row") - 1)
+    console.log("END")
   }
 
   const checkWinner = () => {
+    let winner = players.noPlayer;
     //check horizontal
     for (let rIdx = 0; rIdx < game.board.length; rIdx++) {
       for (let cIdx = 0; cIdx < game.board[0].length - 3; cIdx++) {
@@ -39,7 +43,7 @@ const Board = ({ game, setGame, players, resetCountdown }) => {
           && game.board[rIdx][cIdx + 2] === player
           && game.board[rIdx][cIdx + 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          winner = player
           break;
         };
       }
@@ -54,7 +58,7 @@ const Board = ({ game, setGame, players, resetCountdown }) => {
           && game.board[rIdx + 2][cIdx] === player
           && game.board[rIdx + 3][cIdx] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          winner = player
           break;
         };
       }
@@ -70,7 +74,7 @@ const Board = ({ game, setGame, players, resetCountdown }) => {
           && game.board[rIdx + 2][cIdx - 2] === player
           && game.board[rIdx + 3][cIdx - 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          winner = player;
           break;
         };
       }
@@ -85,11 +89,19 @@ const Board = ({ game, setGame, players, resetCountdown }) => {
           && game.board[rIdx + 2][cIdx + 2] === player
           && game.board[rIdx + 3][cIdx + 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          winner = player
           break;
         };
       }
     }
+
+    if (winner)
+      setGame({
+        ...game,
+        winner: players[winner],
+        scores: { ...game.scores, [players[winner]]: game.scores[players[winner]] + 1 }
+      })
+    return
   }
 
   const Pellet = ({ rIdx, cIdx }) => {
