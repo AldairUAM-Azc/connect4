@@ -64,20 +64,6 @@ const Scores = () => {
 const Board = ({ game, setGame, players }) => {
 
 
-  const Pellet = ({ rIdx, cIdx }) => {
-    const tokens = {
-      [players.P1]: p1Token,
-      [players.P2]: p2Token,
-    }
-    const noToken = ""
-    const token = tokens[game.board[rIdx][cIdx]] ? tokens[game.board[rIdx][cIdx]] : noToken;
-    return (
-      <div className="pellet">
-        <img src={token} />
-      </div>
-    )
-  };
-
 
   const checkWinner = () => {
     //check horizontal
@@ -89,7 +75,7 @@ const Board = ({ game, setGame, players }) => {
           && game.board[rIdx][cIdx + 2] === player
           && game.board[rIdx][cIdx + 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          setGame({...game, winner: players[player]}) 
           break;
         };
       }
@@ -104,7 +90,7 @@ const Board = ({ game, setGame, players }) => {
           && game.board[rIdx + 2][cIdx] === player
           && game.board[rIdx + 3][cIdx] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          setGame({...game, winner: players[player]}) 
           break;
         };
       }
@@ -120,7 +106,7 @@ const Board = ({ game, setGame, players }) => {
           && game.board[rIdx + 2][cIdx - 2] === player
           && game.board[rIdx + 3][cIdx - 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          setGame({...game, winner: players[player]}) 
           break;
         };
       }
@@ -135,7 +121,7 @@ const Board = ({ game, setGame, players }) => {
           && game.board[rIdx + 2][cIdx + 2] === player
           && game.board[rIdx + 3][cIdx + 3] === player
         ) {
-          setGame({ ...game, winner: players[player] })
+          setGame({...game, winner: players[player]}) 
           break;
         };
       }
@@ -147,22 +133,38 @@ const Board = ({ game, setGame, players }) => {
     const col = ev.target.getAttribute("col");
 
     //traverse board and set P1 or P2 in the place of played token
-    const nBoard = game.board.map(
+    const newBoard = game.board.map(
       (r, rIdx) => r.map(
         (_, cIdx) => (cIdx == col && rIdx == row)
           ? game.player
           : game.board[rIdx][cIdx]
       )
     )
+    //update board
     setGame({
       ...game,
       player: game.player === players.P1 ? players.P2 : players.P1, // toggle between players
-      board: nBoard
+      board: newBoard
     })
+    //
     checkWinner()
     if (ev.target.getAttribute("row") > - 1)
       ev.target.setAttribute("row", + ev.target.getAttribute("row") - 1)
   }
+
+  const Pellet = ({ rIdx, cIdx }) => {
+    const tokens = {
+      [players.P1]: p1Token,
+      [players.P2]: p2Token,
+    }
+    const noToken = ""
+    const token = tokens[game.board[rIdx][cIdx]] ? tokens[game.board[rIdx][cIdx]] : noToken;
+    return (
+      <div className="pellet">
+        <img src={token} />
+      </div>
+    )
+  };
 
   return (
     <div className="board">
@@ -191,8 +193,6 @@ const Board = ({ game, setGame, players }) => {
     </div>
   )
 }
-
-
 
 const Turn = ({ game }) => {
   return (
