@@ -31,7 +31,7 @@ function Game() {
 
   const [game, setGame] = useState(initialGame)
 
-  const turnTime = 100 //seconds
+  const turnTime = 30 //seconds
   const [countdown, setCountDown] = useState(turnTime) //cant put countdown in game State since will trigger  a rerender every damn second
   const resetCountdown = () => setCountDown(turnTime)
 
