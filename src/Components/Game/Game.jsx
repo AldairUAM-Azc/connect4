@@ -5,13 +5,33 @@ import p2Token from "../../assets/images/counter-red-small.svg"
 import "./Game.css"
 
 function Game() {
+  const players = {
+    P1: "P1",
+    P2: "P2",
+    noPlayer: null
+  }
+
+  const [game, setGame] = useState({
+    player: players.P1,
+    winner: players.noPlayer,
+    board: [
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+    ]
+
+  })
+
   return (
     <>
       <section className="game">
         <Options></Options>
         <Scores></Scores>
-        <Board></Board>
-        <Turn></Turn>
+        <Board game={game} setGame={setGame} players={players}></Board>
+        <Turn game={game}></Turn>
       </section>
       <div className="bg-decoration"></div>
     </>
@@ -41,23 +61,8 @@ const Scores = () => {
   )
 }
 
-const Board = () => {
-  const players = {
-    P1: "P1",
-    P2: "P2"
-  }
+const Board = ({ game, setGame, players }) => {
 
-  const [game, setGame] = useState({
-    player: players.P1,
-    board: [
-      [null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null],
-    ]
-  })
 
   const Pellet = ({ rIdx, cIdx }) => {
     const tokens = {
@@ -66,7 +71,6 @@ const Board = () => {
     }
     const noToken = ""
     const token = tokens[game.board[rIdx][cIdx]] ? tokens[game.board[rIdx][cIdx]] : noToken;
-
     return (
       <div className="pellet">
         <img src={token} />
@@ -76,21 +80,73 @@ const Board = () => {
 
 
   const checkWinner = () => {
+    //check horizontal
     for (let rIdx = 0; rIdx < game.board.length; rIdx++) {
-      const row = game.board[rIdx];
-      for (let cIdx = 0; cIdx < row.length; cIdx++) {
-        const col = row[cIdx];
-
+      for (let cIdx = 0; cIdx < game.board[0].length - 3; cIdx++) {
+        const player = players[game.board[rIdx][cIdx]];
+        if (game.board[rIdx][cIdx] === player
+          && game.board[rIdx][cIdx + 1] === player
+          && game.board[rIdx][cIdx + 2] === player
+          && game.board[rIdx][cIdx + 3] === player
+        ) {
+          setGame({ ...game, winner: players[player] })
+          break;
+        };
       }
+    }
 
+    // check vertical
+    for (let rIdx = 0; rIdx < game.board.length - 3; rIdx++) {
+      for (let cIdx = 0; cIdx < game.board[0].length; cIdx++) {
+        const player = players[game.board[rIdx][cIdx]];
+        if (game.board[rIdx][cIdx] === player
+          && game.board[rIdx + 1][cIdx] === player
+          && game.board[rIdx + 2][cIdx] === player
+          && game.board[rIdx + 3][cIdx] === player
+        ) {
+          setGame({ ...game, winner: players[player] })
+          break;
+        };
+      }
+    }
+
+    // check ascending diagonal
+    for (let rIdx = 0; rIdx < game.board.length - 3; rIdx++) {
+      for (let cIdx = 3; cIdx < game.board[0].length; cIdx++) {
+        const player = players[game.board[rIdx][cIdx]];
+        // console.log([rIdx, cIdx], [rIdx - 1, cIdx - 1], [rIdx - 2, cIdx - 2], [rIdx - 3, cIdx - 3])
+        if (game.board[rIdx][cIdx] === player
+          && game.board[rIdx + 1][cIdx - 1] === player
+          && game.board[rIdx + 2][cIdx - 2] === player
+          && game.board[rIdx + 3][cIdx - 3] === player
+        ) {
+          setGame({ ...game, winner: players[player] })
+          break;
+        };
+      }
+    }
+
+    // check descending diagonal
+    for (let rIdx = 0; rIdx < game.board.length - 3; rIdx++) {
+      for (let cIdx = 0; cIdx < game.board[0].length - 3; cIdx++) {
+        const player = players[game.board[rIdx][cIdx]];
+        if (game.board[rIdx][cIdx] === player
+          && game.board[rIdx + 1][cIdx + 1] === player
+          && game.board[rIdx + 2][cIdx + 2] === player
+          && game.board[rIdx + 3][cIdx + 3] === player
+        ) {
+          setGame({ ...game, winner: players[player] })
+          break;
+        };
+      }
     }
   }
 
   const playToken = (ev) => {
-    const row = +ev.target.getAttribute("row");
-    const col = +ev.target.getAttribute("col");
+    const row = ev.target.getAttribute("row");
+    const col = ev.target.getAttribute("col");
 
-    //traverse board and set P1 or P2 in the place of token
+    //traverse board and set P1 or P2 in the place of played token
     const nBoard = game.board.map(
       (r, rIdx) => r.map(
         (_, cIdx) => (cIdx == col && rIdx == row)
@@ -99,6 +155,7 @@ const Board = () => {
       )
     )
     setGame({
+      ...game,
       player: game.player === players.P1 ? players.P2 : players.P1, // toggle between players
       board: nBoard
     })
@@ -137,9 +194,12 @@ const Board = () => {
 
 
 
-const Turn = () => {
+const Turn = ({ game }) => {
   return (
     <div className="turn">
+      <p style={{ fontSize: "3rem", color: "white" }}>{
+        game.winner ? " GANADOR" : ""
+      }</p>
       <div className="turn-bg">
         <div className="turn-sign">PLAYER 1'S TURN
           <br />
