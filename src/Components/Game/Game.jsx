@@ -42,23 +42,30 @@ const Scores = () => {
 }
 
 const Board = () => {
-  const [p1, setP1] = useState(true)
-  const [board, setBoard] = useState([
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-    [null, null, null, null, null, null, null],
-  ]);
+  const players = {
+    P1: "P1",
+    P2: "P2"
+  }
+
+  const [game, setGame] = useState({
+    player: players.P1,
+    board: [
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null],
+    ]
+  })
 
   const Pellet = ({ rIdx, cIdx }) => {
     const tokens = {
-      true: p1Token,
-      false: p2Token,
+      [players.P1]: p1Token,
+      [players.P2]: p2Token,
     }
     const noToken = ""
-    const token = tokens[board[rIdx][cIdx]] ? tokens[board[rIdx][cIdx]] : noToken;
+    const token = tokens[game.board[rIdx][cIdx]] ? tokens[game.board[rIdx][cIdx]] : noToken;
 
     return (
       <div className="pellet">
@@ -68,17 +75,34 @@ const Board = () => {
   };
 
 
+  const checkWinner = () => {
+    for (let rIdx = 0; rIdx < game.board.length; rIdx++) {
+      const row = game.board[rIdx];
+      for (let cIdx = 0; cIdx < row.length; cIdx++) {
+        const col = row[cIdx];
+        
+      }
+      
+    }
+  }
+
   const playToken = (ev) => {
     const row = +ev.target.getAttribute("row");
     const col = +ev.target.getAttribute("col");
 
-    const nBoard = board.map(
+    //traverse board and set P1 or P2 in the place of token
+    const nBoard = game.board.map(
       (r, rIdx) => r.map(
-        (_, cIdx) => (cIdx == col && rIdx == row) ? p1 : board[rIdx][cIdx]
+        (_, cIdx) => (cIdx == col && rIdx == row)
+          ? game.player
+          : game.board[rIdx][cIdx]
       )
     )
-    setBoard(nBoard)
-    setP1(!p1)
+    setGame({
+      player: game.player === players.P1 ? players.P2 : players.P1, // toggle between players
+      board: nBoard
+    })
+    checkWinner()
     if (ev.target.getAttribute("row") < 6)
       ev.target.setAttribute("row", + ev.target.getAttribute("row") + 1)
   }
@@ -88,10 +112,10 @@ const Board = () => {
       <div className="back layer"></div>
       <table className="mid layer play-area">
         <tbody>
-          {board.map((row, rIdx) =>
+          {game.board.map((row, rIdx) =>
             <tr key={rIdx}>
               {row.map((col, cIdx) =>
-                <td key={cIdx}><Pellet rIdx={5 - rIdx} cIdx={cIdx} player={p1} /></td>
+                <td key={cIdx}><Pellet rIdx={5 - rIdx} cIdx={cIdx} player={game.player} /></td>
               )}
             </tr>
           )}
