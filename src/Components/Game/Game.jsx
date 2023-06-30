@@ -80,9 +80,9 @@ const Board = () => {
       const row = game.board[rIdx];
       for (let cIdx = 0; cIdx < row.length; cIdx++) {
         const col = row[cIdx];
-        
+
       }
-      
+
     }
   }
 
@@ -103,8 +103,8 @@ const Board = () => {
       board: nBoard
     })
     checkWinner()
-    if (ev.target.getAttribute("row") < 6)
-      ev.target.setAttribute("row", + ev.target.getAttribute("row") + 1)
+    if (ev.target.getAttribute("row") > - 1)
+      ev.target.setAttribute("row", + ev.target.getAttribute("row") - 1)
   }
 
   return (
@@ -115,7 +115,7 @@ const Board = () => {
           {game.board.map((row, rIdx) =>
             <tr key={rIdx}>
               {row.map((col, cIdx) =>
-                <td key={cIdx}><Pellet rIdx={5 - rIdx} cIdx={cIdx} player={game.player} /></td>
+                <td key={cIdx}><Pellet rIdx={rIdx} cIdx={cIdx} player={game.player} /></td>
               )}
             </tr>
           )}
@@ -123,13 +123,13 @@ const Board = () => {
       </table>
       <div className="front layer"></div>
       <div className="interactive layer">
-        <div className="column" col="0" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="1" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="2" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="3" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="4" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="5" row="0" onClick={ev => playToken(ev)}></div>
-        <div className="column" col="6" row="0" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="0" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="1" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="2" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="3" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="4" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="5" row="5" onClick={ev => playToken(ev)}></div>
+        <div className="column" col="6" row="5" onClick={ev => playToken(ev)}></div>
       </div>
     </div>
   )
